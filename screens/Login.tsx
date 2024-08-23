@@ -101,16 +101,6 @@ const LoginScreen = () => {
 
       navigation.navigate('MutualFunds');
     } catch (error: any) {
-      let errorMessage = 'Invalid email or password.';
-
-      if (error.code === 'auth/invalid-email') {
-        errorMessage = 'The email address is badly formatted.';
-      } else if (error.code === 'auth/user-not-found') {
-        errorMessage = 'No user found with this email.';
-      } else if (error.code === 'auth/wrong-password') {
-        errorMessage = 'The password is incorrect.';
-      }
-      Alert.alert('Login Error', errorMessage);
       console.error('Firebase Authentication Error:', error.message);
     }
   };

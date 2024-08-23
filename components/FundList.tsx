@@ -8,7 +8,21 @@ const meezanLogo = require('../assets/meezan.png');
 const FundList = () => {
   const { data, error, isLoading } = useFunds();
 
-  console.log(data);
+if (isLoading) {
+  return (
+    <View>
+      <Text>Loading funds...</Text>
+    </View>
+  );
+}
+
+if (error) {
+  return (
+    <View>
+      <Text>An error occurred while fetching funds.</Text>
+    </View>
+  );
+}
 
   return (
     <View style={styles.container}>
