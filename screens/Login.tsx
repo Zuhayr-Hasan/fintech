@@ -8,8 +8,9 @@ import { LoginScreenNavigationProp } from '../types/navigationType';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';  
 import { useDispatch } from 'react-redux';
-import { login } from '../redux/slices/authSlice'; 
+import { login, setToken } from '../redux/slices/authSlice'; 
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import axios from 'axios';
 
 const LoginScreen = () => {
   const navigation = useNavigation<LoginScreenNavigationProp>();
@@ -74,10 +75,21 @@ const LoginScreen = () => {
         email: email,
       }));
 
+      const response = await axios.post(" https://api.getharvest.app/auth/login", {
+        email,
+        password
+      });
+
+      const jwtToken = response.data.access_token;
+      console.log("JWT", response.data.access_token);
+
+      // dispatch(setToken(jwtToken));
+
       dispatch(login({
         uid: user.uid,
         email: email || '',
       }));
+      dispatch(setToken(jwtToken));
 
       navigation.navigate('MutualFunds');
     } catch (error: any) {

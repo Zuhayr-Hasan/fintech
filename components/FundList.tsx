@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, View, FlatList, Text, TouchableOpacity } from 'react-native';
+import { useFunds } from '../hooks/useFunds';
 
 const alfalahLogo = require('../assets/alfalah.png');
 const meezanLogo = require('../assets/meezan.png');
@@ -50,17 +51,22 @@ const filteredFunds = [
 ];
 
 const FundList = () => {
+  const { data, error, isLoading } = useFunds();
+
+  console.log(data);
+
   return (
     <View style={styles.container}>
-      <Text>Total funds ({filteredFunds.length})</Text>
+      <Text>Total funds ({data?.length})</Text>
       <FlatList
-        data={filteredFunds}
+        data={data}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.fundItem}>
             <View style={styles.fundRow}>
               <View style={styles.fundInfo}>
-                <Image source={item.logo} style={styles.fundLogo} />
+                { item.name.includes("Meezan") ? <Image source={meezanLogo} style={styles.fundLogo} /> : <Image source={alfalahLogo} style={styles.fundLogo} />}
+                
                 <Text style={styles.fundName}>{item.name}</Text>
               </View>
               <View style={styles.annualReturn}>
@@ -68,9 +74,9 @@ const FundList = () => {
                 <Text  
                     style={[
                     styles.returnText,
-                    { color: item.annualReturn >= 0 ? 'green' : 'red', backgroundColor: item.annualReturn >= 0 ? "#ebfaee" : "#faebec" }
+                    { color: item.NAV >= 0 ? 'green' : 'red', backgroundColor: item.NAV >= 0 ? "#ebfaee" : "#faebec" }
                   ]}>
-                  {item.annualReturn >= 0 ? `↑ +${item.annualReturn}%` : `↓ ${item.annualReturn}%`}
+                  {item.NAV >= 0 ? `↑ +${item.NAV}%` : `↓ ${item.NAV}%`}
                 </Text>
               </View>
             </View>
@@ -117,6 +123,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     marginLeft: 8,
+    maxWidth: 180,
   },
   annualReturn: {
     alignItems: 'flex-end', 

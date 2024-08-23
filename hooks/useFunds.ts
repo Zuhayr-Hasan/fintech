@@ -10,7 +10,7 @@ const fetchFunds = async (token: string) => {
 
   const response = await axios.get('https://api.getharvest.app/funds/all', {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: token,
     },
   });
 
@@ -19,7 +19,7 @@ const fetchFunds = async (token: string) => {
 
 export const useFunds = () => {
   const token = useSelector((state: RootState) => state.auth.token);
-
+  console.log('useFetch', token);
   return useQuery({
     queryKey: ['funds', token],
     queryFn: () => fetchFunds(token),
