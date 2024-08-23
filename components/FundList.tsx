@@ -5,51 +5,6 @@ import { useFunds } from '../hooks/useFunds';
 const alfalahLogo = require('../assets/alfalah.png');
 const meezanLogo = require('../assets/meezan.png');
 
-const filteredFunds = [
-  { 
-    id: 1,
-    name: 'Alfalah Islamic Bank',
-    annualReturn: 20.20,
-    logo: alfalahLogo, 
-  },
-  {
-    id: 2,
-    name: 'Meezan Cash Fund',
-    annualReturn: -19.81,
-    logo: meezanLogo,
-  },
-  { 
-    id: 3,
-    name: 'Alfalah Islamic Bank',
-    annualReturn: 20.20,
-    logo: alfalahLogo, 
-  },
-  {
-    id: 4,
-    name: 'Meezan Cash Fund',
-    annualReturn: -19.81,
-    logo: meezanLogo,
-  },
-  { 
-    id: 5,
-    name: 'Alfalah Islamic Bank',
-    annualReturn: 20.20,
-    logo: alfalahLogo, 
-  },
-  {
-    id: 6,
-    name: 'Meezan Cash Fund',
-    annualReturn: 19.81,
-    logo: meezanLogo,
-  },
-  { 
-    id: 7,
-    name: 'Alfalah Islamic Bank',
-    annualReturn: 20.20,
-    logo: alfalahLogo, 
-  },
-];
-
 const FundList = () => {
   const { data, error, isLoading } = useFunds();
 

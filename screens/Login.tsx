@@ -24,13 +24,22 @@ const LoginScreen = () => {
     },
   });
 
+  console.log(formData)
+
   useEffect(() => {
     const loadUserData = async () => {
       try {
         const userData = await AsyncStorage.getItem('user');
+        console.log(userData);
         if (userData) {
-          const { email, uid } = JSON.parse(userData);
+          const { email, uid, password } = JSON.parse(userData);
           dispatch(login({ email, uid }));
+
+          const response = await axios.post("https://api.getharvest.app/auth/login", { email, password });
+          
+          const jwtToken = response.data.access_token;
+          dispatch(setToken(jwtToken));
+          
           navigation.navigate('MutualFunds');
         }
       } catch (error) {
@@ -73,17 +82,16 @@ const LoginScreen = () => {
       await AsyncStorage.setItem('user', JSON.stringify({
         uid: user.uid,
         email: email,
+        password: password,
       }));
 
-      const response = await axios.post(" https://api.getharvest.app/auth/login", {
+      const response = await axios.post("https://api.getharvest.app/auth/login", {
         email,
         password
       });
 
       const jwtToken = response.data.access_token;
       console.log("JWT", response.data.access_token);
-
-      // dispatch(setToken(jwtToken));
 
       dispatch(login({
         uid: user.uid,
