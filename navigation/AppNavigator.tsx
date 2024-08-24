@@ -3,6 +3,7 @@ import { StyleSheet, SafeAreaView, View, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { CustomTabBarButtonProps } from "../types/navigationType"
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Home from '../screens/Home';
@@ -14,7 +15,7 @@ import Login from '../screens/Login';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const CustomTabBarButton = ({ children, onPress }) => (
+const CustomTabBarButton = ({ children, onPress }: CustomTabBarButtonProps) => (
   <TouchableOpacity
     style={styles.customButton}
     onPress={onPress}
@@ -66,7 +67,7 @@ function MutualFundsTabs() {
       />
       <Tab.Screen
         name="Add"
-        component={Funds} 
+        component={Funds}
         options={{
           tabBarIcon: ({ focused }) => (
             <FontAwesome
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#fff',
-    marginTop: 10
+    marginTop: 10,
   },
   tabBarStyle: {
     position: 'absolute',

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import Button from '../components/Button';
 import Input from '../components/Input';
 import { Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -24,22 +23,18 @@ const LoginScreen = () => {
     },
   });
 
-  console.log(formData)
-
   useEffect(() => {
     const loadUserData = async () => {
       try {
         const userData = await AsyncStorage.getItem('user');
-        console.log(userData);
         if (userData) {
           const { email, uid, password } = JSON.parse(userData);
           dispatch(login({ email, uid }));
 
           const response = await axios.post("https://api.getharvest.app/auth/login", { email, password });
-          
           const jwtToken = response.data.access_token;
           dispatch(setToken(jwtToken));
-          
+
           navigation.navigate('MutualFunds');
         }
       } catch (error) {
@@ -85,18 +80,9 @@ const LoginScreen = () => {
         password: password,
       }));
 
-      const response = await axios.post("https://api.getharvest.app/auth/login", {
-        email,
-        password
-      });
-
+      const response = await axios.post("https://api.getharvest.app/auth/login", { email, password });
       const jwtToken = response.data.access_token;
-      console.log("JWT", response.data.access_token);
-
-      dispatch(login({
-        uid: user.uid,
-        email: email || '',
-      }));
+      dispatch(login({ uid: user.uid, email }));
       dispatch(setToken(jwtToken));
 
       navigation.navigate('MutualFunds');
@@ -137,7 +123,9 @@ const LoginScreen = () => {
             <Text style={styles.resetText}>reset</Text>
           </TouchableOpacity>
         </View>
-        <Button onPress={handleLogin} title="Login" style={styles.loginButton} />
+        <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
+          <Text style={styles.loginButtonText}>Login</Text>
+        </TouchableOpacity>
         <View style={styles.signupContainer}>
           <Text style={styles.signupText}>Don’t have an account? </Text>
           <TouchableOpacity>
@@ -189,6 +177,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     borderRadius: 10,
+  },
+  loginButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   signupContainer: {
     flexDirection: 'row',

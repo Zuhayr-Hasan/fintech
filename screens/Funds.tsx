@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#F3F4F6',
+    maxHeight: "90%"
   },
   row: {
     flexDirection: 'row',

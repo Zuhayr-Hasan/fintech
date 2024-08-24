@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View, FlatList, Text, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, View, FlatList, Text, TouchableOpacity, Platform } from 'react-native';
 import { useFunds } from '../hooks/useFunds';
 
 const alfalahLogo = require('../assets/alfalah.png');
@@ -8,21 +8,21 @@ const meezanLogo = require('../assets/meezan.png');
 const FundList = () => {
   const { data, error, isLoading } = useFunds();
 
-if (isLoading) {
-  return (
-    <View>
-      <Text>Loading funds...</Text>
-    </View>
-  );
-}
+  if (isLoading) {
+    return (
+      <View>
+        <Text>Loading funds...</Text>
+      </View>
+    );
+  }
 
-if (error) {
-  return (
-    <View>
-      <Text>An error occurred while fetching funds.</Text>
-    </View>
-  );
-}
+  if (error) {
+    return (
+      <View>
+        <Text>An error occurred while fetching funds.</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     marginLeft: 8,
-    maxWidth: 180,
+    maxWidth: Platform.OS === 'ios' ? 150 : 180,
   },
   annualReturn: {
     alignItems: 'flex-end', 
