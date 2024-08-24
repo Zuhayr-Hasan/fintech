@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#4a66f5',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 18,
     borderRadius: 10,
   },
   loginButtonText: {
