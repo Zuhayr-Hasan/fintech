@@ -64,7 +64,7 @@ export default FundList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#fff',
   },
   fundItem: {
     backgroundColor: '#fff',

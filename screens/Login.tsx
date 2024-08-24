@@ -9,6 +9,7 @@ import { auth } from '../config/firebase';
 import { useDispatch } from 'react-redux';
 import { login, setToken } from '../redux/slices/authSlice'; 
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import { BASE_URL } from '../hooks/useFunds';
 import axios from 'axios';
 
 const LoginScreen = () => {
@@ -31,7 +32,7 @@ const LoginScreen = () => {
           const { email, uid, password } = JSON.parse(userData);
           dispatch(login({ email, uid }));
 
-          const response = await axios.post("https://api.getharvest.app/auth/login", { email, password });
+          const response = await axios.post(`${BASE_URL}/auth/login`, { email, password });
           const jwtToken = response.data.access_token;
           dispatch(setToken(jwtToken));
 

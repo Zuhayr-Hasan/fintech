@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#fff',
     maxHeight: "90%"
   },
   row: {
