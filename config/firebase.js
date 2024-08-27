@@ -1,21 +1,21 @@
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getAuth, initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from '@env';
 
-// Firebase configuration
+console.log('api__key', API_KEY);
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyC2m16dfwL0TDNNOVNUz7QOAK_F9y_GFCk',
-  authDomain: 'fintech-55e27.firebaseapp.com',
-  projectId: 'fintech-55e27',
-  storageBucket: 'fintech-55e27.appspot.com',
-  messagingSenderId: '1026161818531',
-  appId: '1:1026161818531:web:326934115bff2ee3e87816',
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
 };
 
-// Initialize Firebase app
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-// Initialize Firebase Auth with AsyncStorage for persistence
 export const auth = getAuth(app);
 
 if (!auth._initializationPromise) {

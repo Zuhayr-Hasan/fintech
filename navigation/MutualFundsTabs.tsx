@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { CustomTabBarButtonProps } from "../types/navigationType"
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { CustomTabBarButtonProps } from '../types/navigationType';
 import Home from '../screens/Home';
 import Funds from '../screens/Funds';
 import Widhdraw from '../screens/Widhdraw';
@@ -44,7 +44,9 @@ function MutualFundsTabs() {
               color={focused ? '#7081FF' : '#748c94'}
             />
           ),
-          tabBarLabel: 'Home',
+          tabBarLabel: ({ focused }) => (
+            <Text style={{ color: focused ? '#7081FF' : '#748c94' }}>Home</Text>
+          ),
         }}
       />
       <Tab.Screen
@@ -58,7 +60,9 @@ function MutualFundsTabs() {
               color={focused ? '#7081FF' : '#748c94'}
             />
           ),
-          tabBarLabel: 'Funds',
+          tabBarLabel: ({ focused }) => (
+            <Text style={{ color: focused ? '#7081FF' : '#748c94' }}>Funds</Text>
+          ),
         }}
       />
       <Tab.Screen
@@ -90,11 +94,13 @@ function MutualFundsTabs() {
               color={focused ? '#7081FF' : '#748c94'}
             />
           ),
-          tabBarLabel: 'History',
+          tabBarLabel: ({ focused }) => (
+            <Text style={{ color: focused ? '#7081FF' : '#748c94' }}>History</Text>
+          ),
         }}
       />
       <Tab.Screen
-        name="Widhdraw"
+        name="Withdraw"
         component={Widhdraw}
         options={{
           tabBarIcon: ({ focused }) => (
@@ -104,7 +110,9 @@ function MutualFundsTabs() {
               color={focused ? '#7081FF' : '#748c94'}
             />
           ),
-          tabBarLabel: 'Withdraw',
+          tabBarLabel: ({ focused }) => (
+            <Text style={{ color: focused ? '#7081FF' : '#748c94' }}>Withdraw</Text>
+          ),
         }}
       />
     </Tab.Navigator>
@@ -113,48 +121,34 @@ function MutualFundsTabs() {
 
 export default MutualFundsTabs;
 
-
 const styles = StyleSheet.create({
-    safeArea: {
-      flex: 1,
-      backgroundColor: '#fff',
-      marginTop: 10,
-    },
-    tabBarStyle: {
-      position: 'absolute',
-      bottom: 0, 
-      left: 0,
-      right: 0,
-      paddingBottom: 10,
-      paddingTop: 10,
-      backgroundColor: '#fff',
-      height: 85, 
-      elevation: 10, 
-    },
-    tabBarLabelStyle: {
-      fontSize: 14,
-      fontWeight: 'bold', 
-      paddingBottom: 10,
-    },
-    customButton: {
-      top: -25, 
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    customButtonContainer: {
-      width: 60,
-      height: 60,
-      borderRadius: 35,
-      backgroundColor: '#7081FF',
-      marginBottom: 30,
-    },
-    headerStyle: {
-      backgroundColor: '#fff', 
-      height: 80, 
-      paddingVertical: 10, 
-    },
-    headerTitleStyle: {
-      fontSize: 20, 
-    },
-  });
-  
+  tabBarStyle: {
+    position: 'absolute',
+    bottom: 0, 
+    left: 0,
+    right: 0,
+    paddingBottom: 10,
+    paddingTop: 10,
+    backgroundColor: '#fff',
+    height: 85, 
+    elevation: 10, 
+  },
+  tabBarLabelStyle: {
+    fontSize: 14,
+    fontWeight: 'bold', 
+    paddingBottom: 10,
+  },
+  customButton: {
+    top: -25, 
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  customButtonContainer: {
+    width: 60,
+    height: 60,
+    borderRadius: 35,
+    backgroundColor: '#7081FF',
+    //  backgroundColor: 'red',
+    marginBottom: 30,
+  },
+});

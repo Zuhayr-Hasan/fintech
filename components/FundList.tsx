@@ -2,8 +2,8 @@ import React from 'react';
 import { Image, StyleSheet, View, FlatList, Text, TouchableOpacity, Platform } from 'react-native';
 import { useFunds } from '../hooks/useFunds';
 
-const alfalahLogo = require('../assets/alfalah.png');
-const meezanLogo = require('../assets/meezan.png');
+var alfalahLogo = require('../assets/alfalah.png');
+var meezanLogo = require('../assets/meezan.png');
 
 const FundList = () => {
   const { data, error, isLoading } = useFunds();
